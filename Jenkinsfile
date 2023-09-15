@@ -30,6 +30,18 @@ pipeline {
                     }
                 }
             }
+        stage('When') {
+            steps {
+                script {
+                    
+                    when {
+                            expression { sh(script: 'git log -1 --format=%s | grep -q "^ci skip"', returnStatus: true) == 0 }
+
+                    }
+                    sh 'Nie powinienem się wykonać'
+                }
+            }
+        }
         
     }
 }
